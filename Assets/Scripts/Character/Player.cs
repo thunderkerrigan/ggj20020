@@ -11,6 +11,8 @@ namespace ggjj2020 {
 	public class Player : MonoBehaviour
 	{
 		#region PROPERTIES
+
+        public CharacterStatsSO _characterStats;
 		// Horizontal mouvement parameters
 		[Header("Horizontal mouvement")]
         public float _maxSpeed = 10f;
@@ -47,6 +49,10 @@ namespace ggjj2020 {
 		// Start is called before the first frame update
 		void Awake (){			
             this._CharacterController2D = GetComponent<CharacterController2D>();
+			// CharacterStats
+			if (this._characterStats != null) {
+				this._characterStats.OnInputUpdate += UpdateControl;
+			} else { Debug.Log("No CharacterStats set in PlayerInput script"); }
 		}
 
 		// Update is called once per frame
@@ -87,6 +93,13 @@ namespace ggjj2020 {
 
 
 		#region METHODS
+		
+		// CharacterStats control to update
+        private void UpdateControl(CharacterStatsSO characterStats)
+        {
+			this._jumpSpeed = this._characterStats.jumpSpeed;
+        }
+
 		public void Unpause(){
 				//if the timescale is already > 0, we 
 				if (Time.timeScale > 0){return;}
