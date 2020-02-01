@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -229,9 +229,9 @@ public class CharacterStats
             case "ESPACE":
             case " ":
                 return KeyCode.Space;
-                case "ESCAPE":
-                case "ECHAP":
-                    return KeyCode.Escape;
+            case "ESCAPE":
+            case "ECHAP":
+                return KeyCode.Escape;
 
             default:
                 return KeyCode.None;
@@ -261,19 +261,39 @@ public class CharacterStatsSO : ScriptableObject
 
     public int highestCheckpoint = 0;
 
+    public bool shouldReset = false;
+
+    public void ResetValue()
+    {
+        if (shouldReset)
+        {
+            shouldReset = false;
+            Pause = KeyCode.Escape;
+            Interact = KeyCode.E;
+            MeleeAttack = KeyCode.K;
+            RangedAttack = KeyCode.O;
+            Jump = KeyCode.Space;
+            HorizontalPositive = KeyCode.D;
+            HorizontalNegative = KeyCode.A;
+            VerticalPositive = KeyCode.W;
+            VerticalNegative = KeyCode.S;
+        }
+    }
+
     private static CharacterStats[] __initialCharStats = new[]
     {
         new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0f, 0.0f),
         new CharacterStats("ESCAPE", "E", "O", "P", " ", "A", "D", "W", "S", 0.0f, 0.0f),
         new CharacterStats("ESCAPE", "E", "O", "P", "SPACE", "E", "A", "W", "S", 0.0f, 0.0f)
     };
-    
+
     private List<CharacterStats> checkpoints = new List<CharacterStats>(__initialCharStats);
 
     public event Action<CharacterStatsSO> OnInputUpdate;
 
     public void ReadFromConfigFile()
     {
+        ResetValue();
         if (File.Exists(path))
         {
             var reader = new StreamReader(path);
@@ -330,7 +350,7 @@ public class CharacterStatsSO : ScriptableObject
         var charString = new CharacterStatsString(charStats);
         writer.Write(JsonUtility.ToJson(charString));
         writer.Close();
-    ReadFromConfigFile();
+        ReadFromConfigFile();
     }
 
     public void ScrambleStats(int checkpoint)
