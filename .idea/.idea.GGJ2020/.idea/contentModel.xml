@@ -332,6 +332,9 @@
             </e>
           </e>
         </e>
+        <e p="Script" t="Include">
+          <e p="RetryWarning.cs" t="Include" />
+        </e>
         <e p="Scripts" t="Include">
           <e p="Character" t="Include">
             <e p="AudioSurface.cs" t="Include" />
@@ -347,10 +350,13 @@
             <e p="VisibleBubbleUp.cs" t="Include" />
           </e>
           <e p="CharacterStatsSO.cs" t="Include" />
+          <e p="Checkpoint.cs" t="Include" />
+          <e p="GameMaster.cs" t="Include" />
           <e p="Operator" t="Include">
             <e p="GameObjectOperator_FollowTarget.cs" t="Include" />
           </e>
           <e p="PlayerControlConfigurator.cs" t="Include" />
+          <e p="PlayerPos.cs" t="Include" />
         </e>
       </e>
       <e p="ExternalCheck.csproj" t="IncludeRecursive" />

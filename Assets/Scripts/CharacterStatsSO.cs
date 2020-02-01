@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using BTAI;
 using Gamekit2D;
 using UnityEngine;
 using UnityEngine.Events;
 
-class CharacterStatsString
+public class CharacterStatsString
 {
 
     public string Pause;
@@ -39,6 +40,22 @@ class CharacterStatsString
         inputLatency = stats.inputLatency;
     }
 
+    public CharacterStatsString(CharacterStats stats)
+    {
+        Pause = TranslateKey(stats.Pause);
+        Interact = TranslateKey(stats.Interact);
+        MeleeAttack = TranslateKey(stats.MeleeAttack);
+        RangedAttack = TranslateKey(stats.RangedAttack);
+        Jump = TranslateKey(stats.Jump);
+        HorizontalPositive = TranslateKey(stats.HorizontalPositive);
+        HorizontalNegative = TranslateKey(stats.HorizontalNegative);
+        VerticalPositive = TranslateKey(stats.VerticalPositive);
+        VerticalNegative = TranslateKey(stats.VerticalNegative);
+
+        jumpHeight = stats.jumpHeight;
+        inputLatency = stats.inputLatency;
+    }
+    
     private string TranslateKey(KeyCode key)
     {
 
@@ -106,7 +123,7 @@ class CharacterStatsString
     }
 }
 
-class CharacterStats
+public class CharacterStats
 {
     public KeyCode Pause;
     public KeyCode Interact;
@@ -121,6 +138,21 @@ class CharacterStats
     public float jumpHeight;
     public float inputLatency;
 
+    public CharacterStats(string _Pause, string _Interact, string _MeleeAttack, string _RangedAttack, string _Jump, string _HorizontalPositive, string _HorizontalNegative, string _VerticalPositive, string _VerticalNegative, float _jumpHeight, float _inputLatency)
+    {
+        Pause = InterpretKey(_Pause);
+        Interact = InterpretKey(_Interact);
+        MeleeAttack = InterpretKey(_MeleeAttack);
+        RangedAttack = InterpretKey(_RangedAttack);
+        Jump = InterpretKey(_Jump);
+        HorizontalPositive = InterpretKey(_HorizontalPositive);
+        HorizontalNegative = InterpretKey(_HorizontalNegative);
+        VerticalPositive = InterpretKey(_VerticalPositive);
+        VerticalNegative = InterpretKey(_VerticalNegative);
+
+        jumpHeight = _jumpHeight;
+        inputLatency = _inputLatency;
+    }
     public CharacterStats(CharacterStatsString statsString)
     {
         Pause = InterpretKey(statsString.Pause);
@@ -195,6 +227,7 @@ class CharacterStats
                 return KeyCode.Z;
             case "SPACE":
             case "ESPACE":
+            case " ":
                 return KeyCode.Space;
                 case "ESCAPE":
                 case "ECHAP":
@@ -209,9 +242,10 @@ class CharacterStats
 [CreateAssetMenu(fileName = "CharacterStats", menuName = "ScriptableObjects/CharacterStats", order = 1)]
 public class CharacterStatsSO : ScriptableObject
 {
+    private readonly string _baseDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                                       "/RepairGame/ConfigurationFiles/";
 
-    public string dir = "/Users/joseph/Projects/test_dir/";
-    private string path => dir + "spline.json";
+    private string path => _baseDir + "spline.json";
     public KeyCode Pause = KeyCode.Escape;
     public KeyCode Interact = KeyCode.E;
     public KeyCode MeleeAttack = KeyCode.K;
@@ -225,9 +259,19 @@ public class CharacterStatsSO : ScriptableObject
     public float jumpHeight;
     public float inputLatency;
 
+    private float highestCheckpoint = 0;
+
+    private static CharacterStats[] __initialCharStats = new[]
+    {
+        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0, 0.0),
+        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0, 0.0),
+        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0, 0.0)
+    };
     
+    private List<CharacterStats> checkpoints = new List<CharacterStats>(__initialCharStats);
+
     public event Action<CharacterStatsSO> OnInputUpdate;
-    
+
     public void ReadFromConfigFile()
     {
         if (File.Exists(path))
@@ -272,17 +316,36 @@ public class CharacterStatsSO : ScriptableObject
 
     public void WriteFromConfigFile()
     {
-        Directory.CreateDirectory(dir);
+        Directory.CreateDirectory(_baseDir);
         var writer = new StreamWriter(path);
-        writer.Write("// https://keycode.info/\n");
         var charString = new CharacterStatsString(this);
         writer.Write(JsonUtility.ToJson(charString));
         writer.Close();
 
     }
 
+    public void OverwriteFromConfigFile(CharacterStats charStats)
+    {
+        Directory.CreateDirectory(_baseDir);
+        var writer = new StreamWriter(path);
+        var charString = new CharacterStatsString(charStats);
+        writer.Write(JsonUtility.ToJson(charString));
+        writer.Close();
+    ReadFromConfigFile();
+    }
+
     public void ScrambleStats(int checkpoint)
     {
-
+        Debug.Log("checkpoint " + checkpoint);
+        if (checkpoint > highestCheckpoint)
+        {
+            Debug.Log("is higher ");
+            highestCheckpoint = checkpoint;
+            var charStats = checkpoints[checkpoint - 1];
+            if (charStats != null)
+            {
+                OverwriteFromConfigFile(charStats);
+            }
+        }
     }
 }

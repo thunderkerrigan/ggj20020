@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4412717459772712665}
   - component: {fileID: 4412717459772712664}
   - component: {fileID: 4412717459772712671}
-  - component: {fileID: 4412717459772712666}
+  - component: {fileID: 63868862859940923}
   m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
@@ -109,7 +109,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 10}
   m_EdgeRadius: 0
---- !u!114 &4412717459772712666
+--- !u!114 &63868862859940923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3b68a0d5e69f643a88d1961ce53548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpointNumber: 0
+  characterStats: {fileID: 11400000, guid: 48533858a43174a2ba3953e9ca06613b, type: 2}
