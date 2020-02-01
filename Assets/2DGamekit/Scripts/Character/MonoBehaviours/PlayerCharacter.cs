@@ -13,6 +13,7 @@ namespace Gamekit2D
         static protected PlayerCharacter s_PlayerInstance;
         static public PlayerCharacter PlayerInstance { get { return s_PlayerInstance; } }
 
+
         public InventoryController inventoryController
         {
             get { return m_InventoryController; }
@@ -118,7 +119,6 @@ namespace Gamekit2D
         void Awake()
         {
             s_PlayerInstance = this;
-
             m_CharacterController2D = GetComponent<CharacterController2D>();
             m_Animator = GetComponent<Animator>();
             m_Capsule = GetComponent<CapsuleCollider2D>();
