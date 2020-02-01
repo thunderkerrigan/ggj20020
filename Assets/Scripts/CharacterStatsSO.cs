@@ -277,6 +277,7 @@ public class CharacterStatsSO : ScriptableObject
             HorizontalNegative = KeyCode.A;
             VerticalPositive = KeyCode.W;
             VerticalNegative = KeyCode.S;
+            WriteFromConfigFile();
         }
     }
 
