@@ -6399,7 +6399,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: c325d97ce27776645bad5015a39d864d, type: 2}
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -6495,14 +6495,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdee01156afadb94c896fbbce33a3a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 10
-  _groundAcceleration: 100
+  _maxSpeed: 7
+  _groundAcceleration: 50
   _groundDeceleration: 100
   _airborneAccelProportion: 1
   _airborneDecelProportion: 0.5
   _gravity: 38
   _jumpSpeed: 16.5
   _jumpAbortSpeedReduction: 100
+  _initialFallVelocity: -0.1
 --- !u!114 &2027006137
 MonoBehaviour:
   m_ObjectHideFlags: 0

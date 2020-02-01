@@ -24,11 +24,13 @@ namespace ggjj2020 {
         public float _gravity = 50f;
         public float _jumpSpeed = 20f;
         public float _jumpAbortSpeedReduction = 100f;
+		[Range(-1f, 0f)] public float _initialFallVelocity;
 		
         protected bool _InPause = false;
 		protected CharacterController2D _CharacterController2D;
         protected Vector2 _MoveVector;
         protected TileBase _CurrentSurface;
+		protected bool _isJumping;
 
 		// Animation
         protected Animator _Animator;
@@ -65,8 +67,13 @@ namespace ggjj2020 {
 			// Get Horizontal movement input
 			this.GroundedHorizontalMovement(PlayerInput.Instance.Horizontal.ReceivingInput);
 
-			if (this.CheckForJumpInput() && this.CheckForGrounded() ) { this.SetVerticalMovement(this._jumpSpeed); }
 			// Manage Jump
+			bool isGrounded = this.CheckForGrounded();
+			if (isGrounded) { this._isJumping = false; } // We are not jumping if we are grounded
+			if (this.CheckForJumpInput() && isGrounded ) {
+				this.SetVerticalMovement(this._jumpSpeed);
+				this._isJumping = true;
+			}
 			UpdateJump();
 			AirborneHorizontalMovement();
 			AirborneVerticalMovement();
@@ -193,11 +200,6 @@ namespace ggjj2020 {
         {
             this._MoveVector.y += additionalVerticalMovement;
         }
-		
-        public bool IsFalling()
-        {
-            return this._MoveVector.y < 0f && !this._Animator.GetBool(this._HashGroundedPara);
-        }
 
         public void UpdateJump()
         {
@@ -223,12 +225,28 @@ namespace ggjj2020 {
 
         public void AirborneVerticalMovement()
         {
-            if (Mathf.Approximately(this._MoveVector.y, 0f) || this._CharacterController2D.IsCeilinged && this._MoveVector.y > 0f){
+			bool isGrounded = this.CheckForGrounded();
+            if (Mathf.Approximately(this._MoveVector.y, 0f) || (this._CharacterController2D.IsCeilinged && this._MoveVector.y > 0f) || (isGrounded && !this._isJumping)){
                 this._MoveVector.y = 0f;
             }
-            this._MoveVector.y -= this._gravity * Time.deltaTime;
+			// Jumping
+			if (this._isJumping) {
+				this._MoveVector.y -= this._gravity * Time.deltaTime;
+			// Falling
+			}else if (!isGrounded && !this._isJumping) {
+				if(this._MoveVector.y == 0f) { this._MoveVector.y = this._initialFallVelocity * 100; }
+				this._MoveVector.y -= this._gravity * Time.deltaTime;
+			}
+
+			// Cap the falling speed to gravity.
+			if (this._MoveVector.y < -this._gravity) { this._MoveVector.y = -this._gravity; }
         }
 		#endregion
-
+		
+		// ----------- Falling Mouvement -----------------
+        public bool IsFalling()
+        {
+            return this._MoveVector.y < 0f && !this._Animator.GetBool(this._HashGroundedPara);
+        }
 	}
 }
