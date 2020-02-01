@@ -21,7 +21,7 @@ public class CharacterStatsString
     public string VerticalPositive;
     public string VerticalNegative;
 
-    public float jumpHeight;
+    public float jumpSpeed;
     public float inputLatency;
 
     public CharacterStatsString(CharacterStatsSO stats)
@@ -36,7 +36,7 @@ public class CharacterStatsString
         VerticalPositive = TranslateKey(stats.VerticalPositive);
         VerticalNegative = TranslateKey(stats.VerticalNegative);
 
-        jumpHeight = stats.jumpHeight;
+        jumpSpeed = stats.jumpSpeed;
         inputLatency = stats.inputLatency;
     }
 
@@ -52,7 +52,7 @@ public class CharacterStatsString
         VerticalPositive = TranslateKey(stats.VerticalPositive);
         VerticalNegative = TranslateKey(stats.VerticalNegative);
 
-        jumpHeight = stats.jumpHeight;
+        jumpSpeed = stats.jumpSpeed;
         inputLatency = stats.inputLatency;
     }
     
@@ -135,10 +135,10 @@ public class CharacterStats
     public KeyCode VerticalPositive;
     public KeyCode VerticalNegative;
 
-    public float jumpHeight;
+    public float jumpSpeed;
     public float inputLatency;
 
-    public CharacterStats(string _Pause, string _Interact, string _MeleeAttack, string _RangedAttack, string _Jump, string _HorizontalPositive, string _HorizontalNegative, string _VerticalPositive, string _VerticalNegative, float _jumpHeight, float _inputLatency)
+    public CharacterStats(string _Pause, string _Interact, string _MeleeAttack, string _RangedAttack, string _Jump, string _HorizontalPositive, string _HorizontalNegative, string _VerticalPositive, string _VerticalNegative, float _jumpSpeed, float _inputLatency)
     {
         Pause = InterpretKey(_Pause);
         Interact = InterpretKey(_Interact);
@@ -150,7 +150,7 @@ public class CharacterStats
         VerticalPositive = InterpretKey(_VerticalPositive);
         VerticalNegative = InterpretKey(_VerticalNegative);
 
-        jumpHeight = _jumpHeight;
+        jumpSpeed = _jumpSpeed;
         inputLatency = _inputLatency;
     }
     public CharacterStats(CharacterStatsString statsString)
@@ -165,7 +165,7 @@ public class CharacterStats
         VerticalPositive = InterpretKey(statsString.VerticalPositive);
         VerticalNegative = InterpretKey(statsString.VerticalNegative);
 
-        jumpHeight = statsString.jumpHeight;
+        jumpSpeed = statsString.jumpSpeed;
         inputLatency = statsString.inputLatency;
     }
     private KeyCode InterpretKey(string key)
@@ -256,7 +256,7 @@ public class CharacterStatsSO : ScriptableObject
     public KeyCode VerticalPositive = KeyCode.W;
     public KeyCode VerticalNegative = KeyCode.S;
 
-    public float jumpHeight;
+    public float jumpSpeed;
     public float inputLatency;
 
     public int highestCheckpoint = 0;
@@ -283,9 +283,9 @@ public class CharacterStatsSO : ScriptableObject
 
     private static CharacterStats[] __initialCharStats = new[]
     {
-        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0f, 0.0f),
-        new CharacterStats("ESCAPE", "E", "O", "P", " ", "A", "D", "W", "S", 0.0f, 0.0f),
-        new CharacterStats("ESCAPE", "E", "O", "P", "SPACE", "E", "A", "W", "S", 0.0f, 0.0f)
+        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 5f, 0.0f),
+        new CharacterStats("ESCAPE", "E", "O", "P", " ", "A", "D", "W", "S", 5f, 0.0f),
+        new CharacterStats("ESCAPE", "E", "O", "P", "SPACE", "E", "A", "W", "S", 5f, 0.0f)
     };
 
     private List<CharacterStats> checkpoints = new List<CharacterStats>(__initialCharStats);
@@ -311,7 +311,7 @@ public class CharacterStatsSO : ScriptableObject
             HorizontalNegative = stats.HorizontalNegative;
             VerticalPositive = stats.VerticalPositive;
             VerticalNegative = stats.VerticalNegative;
-            jumpHeight = stats.jumpHeight;
+            jumpSpeed = stats.jumpSpeed;
             inputLatency = stats.inputLatency;
             if (OnInputUpdate != null)
                 OnInputUpdate(this);

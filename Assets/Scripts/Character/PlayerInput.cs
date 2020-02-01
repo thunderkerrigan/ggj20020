@@ -11,7 +11,7 @@ namespace ggjj2020
 
         protected static PlayerInput s_Instance;
 		
-        public CharacterStatsSO characterStats;
+        public CharacterStatsSO _characterStats;
         private Coroutine watchFileCoroutine;
     
     
@@ -37,9 +37,12 @@ namespace ggjj2020
             if (s_Instance == null)
             {
                 s_Instance = this;
-                characterStats.ReadFromConfigFile();
-                watchFileCoroutine = StartCoroutine(characterStats.WatchFile());
-                characterStats.OnInputUpdate +=UpdateControl;
+				// CharacterStats
+				if (this._characterStats != null) {
+					this._characterStats.OnInputUpdate += UpdateControl;
+					this._characterStats.ReadFromConfigFile();
+					watchFileCoroutine = StartCoroutine(this._characterStats.WatchFile());
+				} else { Debug.Log("No CharacterStats set in PlayerInput script"); }
             }
             else
                 throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
@@ -51,9 +54,12 @@ namespace ggjj2020
             if (s_Instance == null)
             {
                 s_Instance = this;
-                characterStats.ReadFromConfigFile();
-                watchFileCoroutine = StartCoroutine(characterStats.WatchFile());
-                characterStats.OnInputUpdate +=UpdateControl;
+				// CharacterStats
+				if (this._characterStats != null) {
+					this._characterStats.OnInputUpdate += UpdateControl;
+					this._characterStats.ReadFromConfigFile();
+					//watchFileCoroutine = StartCoroutine(this._characterStats.WatchFile());
+				} else { Debug.Log("No CharacterStats set in PlayerInput script"); }
             }
             else if(s_Instance != this)
                 throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
@@ -64,21 +70,24 @@ namespace ggjj2020
         void OnDisable()
         {
             PersistentDataManager.UnregisterPersister(this);
-            StopCoroutine(watchFileCoroutine);
-            characterStats.OnInputUpdate -= UpdateControl;
+				// CharacterStats
+				if (this._characterStats != null) {
+					StopCoroutine(watchFileCoroutine);
+					this._characterStats.OnInputUpdate -= UpdateControl;
+				} else { Debug.Log("No CharacterStats set in PlayerInput script"); }
             s_Instance = null;
         }
-				
+		
+		// CharacterStats control to update
         private void UpdateControl(CharacterStatsSO characterStats)
         {
-           // print("SALUT IL S'PASSE UN TRUC!");
-        Pause = new InputButton(characterStats.Pause, XboxControllerButtons.Menu);
-        Interact = new InputButton(characterStats.Interact, XboxControllerButtons.Y);
-        MeleeAttack = new InputButton(characterStats.MeleeAttack, XboxControllerButtons.X);
-        RangedAttack = new InputButton(characterStats.RangedAttack, XboxControllerButtons.B);
-        Jump = new InputButton(characterStats.Jump, XboxControllerButtons.A);
-        Horizontal = new InputAxis(characterStats.HorizontalPositive, characterStats.HorizontalNegative, XboxControllerAxes.LeftstickHorizontal);
-        Vertical = new InputAxis(characterStats.VerticalPositive, characterStats.VerticalNegative, XboxControllerAxes.LeftstickVertical);
+			Pause = new InputButton(characterStats.Pause, XboxControllerButtons.Menu);
+			Interact = new InputButton(characterStats.Interact, XboxControllerButtons.Y);
+			MeleeAttack = new InputButton(characterStats.MeleeAttack, XboxControllerButtons.X);
+			RangedAttack = new InputButton(characterStats.RangedAttack, XboxControllerButtons.B);
+			Jump = new InputButton(characterStats.Jump, XboxControllerButtons.A);
+			Horizontal = new InputAxis(characterStats.HorizontalPositive, characterStats.HorizontalNegative, XboxControllerAxes.LeftstickHorizontal);
+			Vertical = new InputAxis(characterStats.VerticalPositive, characterStats.VerticalNegative, XboxControllerAxes.LeftstickVertical);
         }
 
         protected override void GetInputs(bool fixedUpdateHappened)
