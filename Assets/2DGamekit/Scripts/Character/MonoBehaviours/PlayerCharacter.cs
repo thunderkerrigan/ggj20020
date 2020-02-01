@@ -134,7 +134,7 @@ namespace Gamekit2D
             m_TanHurtJumpAngle = Mathf.Tan(Mathf.Deg2Rad * hurtJumpAngle);
             m_FlickeringWait = new WaitForSeconds(flickeringDuration);
 
-            meleeDamager.DisableDamage();
+			if (meleeDamager != null) { meleeDamager.DisableDamage(); }
 
             m_ShotSpawnGap = 1f / shotsPerSecond;
             m_NextShotTime = Time.time;
@@ -748,14 +748,16 @@ namespace Gamekit2D
 
         public void EnableMeleeAttack()
         {
-            meleeDamager.EnableDamage();
-            meleeDamager.disableDamageAfterHit = true;
-            meleeAttackAudioPlayer.PlayRandomSound();
+			if (meleeDamager != null) {
+				meleeDamager.EnableDamage();
+				meleeDamager.disableDamageAfterHit = true;
+				meleeAttackAudioPlayer.PlayRandomSound();
+			}
         }
 
         public void DisableMeleeAttack()
         {
-            meleeDamager.DisableDamage();
+			if (meleeDamager != null) { meleeDamager.DisableDamage(); }
         }
 
         public void TeleportToColliderBottom()
