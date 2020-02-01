@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278133318}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.6, y: -4.3, z: 0}
+  m_LocalPosition: {x: 4.34, y: 4.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1767615843}
@@ -6203,7 +6203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057418327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.98, y: -5.65, z: -1}
+  m_LocalPosition: {x: -6.33, y: -1.16, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1916309565}
@@ -6307,7 +6307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916309564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.33, y: 2.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1057418330}
@@ -6416,8 +6416,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
+  m_Offset: {x: 0.016065598, y: 0.99451184}
+  m_Size: {x: 0.5321312, y: 2.1276298}
   m_Direction: 0
 --- !u!212 &2027006134
 SpriteRenderer:
@@ -6477,7 +6477,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027006130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.08, y: -8.26, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6498,10 +6498,10 @@ MonoBehaviour:
   _maxSpeed: 10
   _groundAcceleration: 100
   _groundDeceleration: 100
-  _airborneAccelProportion: 0
-  _airborneDecelProportion: 0
-  _gravity: 50
-  _jumpSpeed: 20
+  _airborneAccelProportion: 1
+  _airborneDecelProportion: 0.5
+  _gravity: 38
+  _jumpSpeed: 16.5
   _jumpAbortSpeedReduction: 100
 --- !u!114 &2027006137
 MonoBehaviour:
@@ -6517,7 +6517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundedLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147549184
   groundedRaycastDistance: 0.1
 --- !u!95 &2027006138
 Animator:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace ggjj2020 {
 	[RequireComponent(typeof(CapsuleCollider2D))]
@@ -27,6 +28,7 @@ namespace ggjj2020 {
         protected bool _InPause = false;
 		protected CharacterController2D _CharacterController2D;
         protected Vector2 _MoveVector;
+        protected TileBase _CurrentSurface;
 
 		// Animation
         protected Animator _Animator;
@@ -35,6 +37,7 @@ namespace ggjj2020 {
         protected readonly int _HashGroundedPara = Animator.StringToHash("Grounded");
 		
         protected const float k_GroundedStickingVelocityMultiplier = 3f;    // This is to help the character stick to vertically moving platforms.
+		
 		#endregion
 
 
@@ -62,8 +65,11 @@ namespace ggjj2020 {
 			// Get Horizontal movement input
 			this.GroundedHorizontalMovement(PlayerInput.Instance.Horizontal.ReceivingInput);
 
+			if (this.CheckForJumpInput() && this.CheckForGrounded() ) { this.SetVerticalMovement(this._jumpSpeed); }
 			// Manage Jump
 			UpdateJump();
+			AirborneHorizontalMovement();
+			AirborneVerticalMovement();
 		}
 		void FixedUpdate () {
             this._CharacterController2D.Move(this._MoveVector * Time.deltaTime);
@@ -109,12 +115,46 @@ namespace ggjj2020 {
             return this._MoveVector;
         }
 		
+        public bool CheckForGrounded()
+        {
+            //bool wasGrounded = this._Animator.GetBool(this._HashGroundedPara);
+            bool grounded = this._CharacterController2D.IsGrounded;
+
+            if (grounded){
+                FindCurrentSurface();
+
+				//only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
+                /*if (!wasGrounded && this._MoveVector.y < -1.0f){
+                    landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
+                }*/
+			} else { this._CurrentSurface = null; }
+
+            //this._Animator.SetBool(this._HashGroundedPara, grounded);
+
+            return grounded;
+        }
+		
+        public void FindCurrentSurface()
+        {
+            Collider2D groundCollider = this._CharacterController2D.GroundColliders[0];
+
+			if (groundCollider == null) { groundCollider = this._CharacterController2D.GroundColliders[1]; }
+
+			if (groundCollider == null) { return; }
+
+            TileBase b = PhysicsHelper.FindTileForOverride(groundCollider, transform.position, Vector2.down);
+            if (b != null){
+                this._CurrentSurface = b;
+            }
+        }
+
 		// ----------- Horizontal Mouvement -----------------
         public void SetHorizontalMovement(float newHorizontalMovement)
         {
             this._MoveVector.x = newHorizontalMovement;
         }
 
+		// Move the player on Horizontal axis
         public void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
         {
             float desiredSpeed = useInput ? PlayerInput.Instance.Horizontal.Value * this._maxSpeed * speedScale : 0f;
@@ -139,6 +179,7 @@ namespace ggjj2020 {
             this._MoveVector.y = newVerticalMovement;
         }
 		
+		// Update Vertical speed on Grounded wich move on vertical axis
         public void GroundedVerticalMovement()
         {
             this._MoveVector.y -= this._gravity * Time.deltaTime;
