@@ -259,13 +259,13 @@ public class CharacterStatsSO : ScriptableObject
     public float jumpHeight;
     public float inputLatency;
 
-    private float highestCheckpoint = 0;
+    public int highestCheckpoint = 0;
 
     private static CharacterStats[] __initialCharStats = new[]
     {
-        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0, 0.0),
-        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0, 0.0),
-        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0, 0.0)
+        new CharacterStats("ESCAPE", "E", "O", "P", "W", "D", "A", "W", "S", 0.0f, 0.0f),
+        new CharacterStats("ESCAPE", "E", "O", "P", " ", "A", "D", "W", "S", 0.0f, 0.0f),
+        new CharacterStats("ESCAPE", "E", "O", "P", "SPACE", "E", "A", "W", "S", 0.0f, 0.0f)
     };
     
     private List<CharacterStats> checkpoints = new List<CharacterStats>(__initialCharStats);
@@ -278,7 +278,6 @@ public class CharacterStatsSO : ScriptableObject
         {
             var reader = new StreamReader(path);
             // Debug.Log();
-            var comment = reader.ReadLine();
             var content = reader.ReadToEnd();
             var json = JsonUtility.FromJson<CharacterStatsString>(content);
             var stats = new CharacterStats(json);
