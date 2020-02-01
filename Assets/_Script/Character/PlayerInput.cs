@@ -10,6 +10,9 @@ namespace ggjj2020
         }
 
         protected static PlayerInput s_Instance;
+		
+        public CharacterStatsSO characterStats;
+        private Coroutine watchFileCoroutine;
     
     
         public bool HaveControl { get { return m_HaveControl; } }
@@ -30,16 +33,28 @@ namespace ggjj2020
 
         void Awake ()
         {
+            
             if (s_Instance == null)
+            {
                 s_Instance = this;
+                characterStats.ReadFromConfigFile();
+                watchFileCoroutine = StartCoroutine(characterStats.WatchFile());
+                characterStats.OnInputUpdate +=UpdateControl;
+            }
             else
                 throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
         }
 
         void OnEnable()
         {
+            
             if (s_Instance == null)
+            {
                 s_Instance = this;
+                characterStats.ReadFromConfigFile();
+                watchFileCoroutine = StartCoroutine(characterStats.WatchFile());
+                characterStats.OnInputUpdate +=UpdateControl;
+            }
             else if(s_Instance != this)
                 throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
         
@@ -49,8 +64,21 @@ namespace ggjj2020
         void OnDisable()
         {
             PersistentDataManager.UnregisterPersister(this);
-
+            StopCoroutine(watchFileCoroutine);
+            characterStats.OnInputUpdate -= UpdateControl;
             s_Instance = null;
+        }
+				
+        private void UpdateControl(CharacterStatsSO characterStats)
+        {
+           // print("SALUT IL S'PASSE UN TRUC!");
+        Pause = new InputButton(characterStats.Pause, XboxControllerButtons.Menu);
+        Interact = new InputButton(characterStats.Interact, XboxControllerButtons.Y);
+        MeleeAttack = new InputButton(characterStats.MeleeAttack, XboxControllerButtons.X);
+        RangedAttack = new InputButton(characterStats.RangedAttack, XboxControllerButtons.B);
+        Jump = new InputButton(characterStats.Jump, XboxControllerButtons.A);
+        Horizontal = new InputAxis(characterStats.HorizontalPositive, characterStats.HorizontalNegative, XboxControllerAxes.LeftstickHorizontal);
+        Vertical = new InputAxis(characterStats.VerticalPositive, characterStats.VerticalNegative, XboxControllerAxes.LeftstickVertical);
         }
 
         protected override void GetInputs(bool fixedUpdateHappened)
