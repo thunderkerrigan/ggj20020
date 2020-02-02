@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 960821247741833426}
   - component: {fileID: 960821247741833437}
   - component: {fileID: 960821247741833427}
+  - component: {fileID: 7193650415691381237}
   m_Layer: 5
   m_Name: ConsoleLog
   m_TagString: Untagged
@@ -104,6 +105,18 @@ MonoBehaviour:
   InputColor: {r: 0, g: 1, b: 1, a: 1}
   WarningColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   ErrorColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &7193650415691381237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960821247741833439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212015cfd8858a54e8796dfa2b6e9b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &960821248677744376
 GameObject:
   m_ObjectHideFlags: 0

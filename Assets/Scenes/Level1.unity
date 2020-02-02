@@ -13376,6 +13376,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 834621928}
     m_Modifications:
+    - target: {fileID: 960821248677744370, guid: 19c2b13496792544ab7da64af3243053,
+        type: 3}
+      propertyPath: ToggleHotkey
+      value: /
+      objectReference: {fileID: 0}
     - target: {fileID: 960821248677744376, guid: 19c2b13496792544ab7da64af3243053,
         type: 3}
       propertyPath: m_Name
