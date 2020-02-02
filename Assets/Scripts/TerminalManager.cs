@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using BTAI;
 using CommandTerminal;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TerminalManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    public Camera camera;
     private List<GameObject> platforms = new List<GameObject>();
+    private GlitchEffect glitchEffect;
+    private Coroutine glitchcoroutine;
     public event Action<bool> OnPlatform;
     
     public static TerminalManager Instance
@@ -28,7 +32,15 @@ public class TerminalManager : MonoBehaviour
     }
     void Start()
     {
-            Terminal.Shell.AddCommand("PlatForm", PlatForm, 0, 2, "Manage Platforms");
+        // var camera = Camera.current;
+        if (camera != null)
+        {
+            Debug.Log("got cam");
+            glitchEffect = camera.GetComponent<GlitchEffect>();
+            StartGlitch();
+        }
+        Terminal.Shell.AddCommand("PlatForm", PlatForm, 0, 2, "Manage Platforms");
+        Terminal.Shell.AddCommand("cam", Camera, 1, 1, "Manage Camera");
     }
     
     public void RegisterPlatform(GameObject go)
@@ -36,6 +48,40 @@ public class TerminalManager : MonoBehaviour
         if (!platforms.Contains(go))
         {
             platforms.Add(go);
+        }
+    }
+
+    private IEnumerator Glitch()
+    {
+        while (true)
+        {
+            if (glitchEffect)
+            {
+                glitchEffect.intensity = Math.Min(glitchEffect.intensity + Random.Range(0, 0.08f), 1f);
+                glitchEffect.flipIntensity = Math.Min(glitchEffect.flipIntensity + Random.Range(0, 0.08f), 1f);
+                glitchEffect.colorIntensity = Math.Min(glitchEffect.colorIntensity + Random.Range(0, 0.08f), 1f);    
+            }
+            yield return new WaitForSeconds(6);
+        }
+    }
+
+    public void StartGlitch()
+    {
+        glitchcoroutine = StartCoroutine(Glitch());
+    }
+    
+    public void StopGlitch()
+    {
+        StopCoroutine(glitchcoroutine);
+    }
+
+    public void ResetGlitchCamera()
+    {
+        if (glitchEffect)
+        {
+        glitchEffect.intensity = 0;
+        glitchEffect.flipIntensity = 0;
+        glitchEffect.colorIntensity = 0;
         }
     }
     
@@ -85,6 +131,27 @@ public class TerminalManager : MonoBehaviour
             OnPlatform(true);
         }
 
+    }
+    
+    private void Camera(CommandArg[] args)
+    {
+
+        if (args.Length == 0)
+        {
+            Terminal.Log("cam reset : Reset camera view. Might get rid of those sneaky glitches.");
+            return;
+                                
+        }
+        switch (args[0].String.ToUpper())
+        {
+            case "RESET":
+                Terminal.Log("Cameras reset!");
+                ResetGlitchCamera();
+                break;
+            default:
+                Terminal.Log("camera reset : Reset camera view. Might get rid of those sneaky glitches.");
+                break;
+        }
     }
 
     private void EnablePlatform(CommandArg[] args)
