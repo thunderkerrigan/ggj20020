@@ -21,7 +21,7 @@ MonoBehaviour:
   HorizontalNegative: 113
   VerticalPositive: 119
   VerticalNegative: 115
-  jumpSpeed: 30
+  jumpSpeed: 15
   inputLatency: 0
   highestCheckpoint: 2
   shouldReset: 0
