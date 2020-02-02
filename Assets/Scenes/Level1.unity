@@ -178,6 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3b68a0d5e69f643a88d1961ce53548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpointNumber: 0
+  characterStats: {fileID: 0}
 --- !u!61 &583969265
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6473,6 +6475,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 834621928}
     m_Modifications:
+    - target: {fileID: 960821248677744370, guid: 19c2b13496792544ab7da64af3243053,
+        type: 3}
+      propertyPath: ToggleHotkey
+      value: /
+      objectReference: {fileID: 0}
     - target: {fileID: 960821248677744376, guid: 19c2b13496792544ab7da64af3243053,
         type: 3}
       propertyPath: m_Name

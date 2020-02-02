@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +7,8 @@ using BTAI;
 using Gamekit2D;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
+
 
 public class CharacterStatsString
 {
@@ -55,7 +57,7 @@ public class CharacterStatsString
         jumpHeight = stats.jumpHeight;
         inputLatency = stats.inputLatency;
     }
-    
+
     private string TranslateKey(KeyCode key)
     {
 
@@ -367,5 +369,8 @@ public class CharacterStatsSO : ScriptableObject
                 OverwriteFromConfigFile(charStats);
             }
         }
+
+        
+        throw new UnityException("BRIAN TU PUE");
     }
 }

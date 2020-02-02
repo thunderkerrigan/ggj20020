@@ -6,8 +6,8 @@ namespace CommandTerminal
 {
     public static class BuiltinCommands
     {
-        [RegisterCommand(Help = "Does nothing")]
-        static void CommandNoop(CommandArg[] args) { }
+        //[RegisterCommand(Help = "Does nothing")]
+        //static void CommandNoop(CommandArg[] args) { }
 
         [RegisterCommand(Help = "Clears the Command Console", MaxArgCount = 0)]
         static void CommandClear(CommandArg[] args) {
@@ -39,16 +39,16 @@ namespace CommandTerminal
             }
         }
 
-        [RegisterCommand(Help = "Times the execution of a Command", MinArgCount = 1)]
-        static void CommandTime(CommandArg[] args) {
-            var sw = new Stopwatch();
-            sw.Start();
-
-            Terminal.Shell.RunCommand(JoinArguments(args));
-
-            sw.Stop();
-            Terminal.Log("Time: {0}ms", (double)sw.ElapsedTicks / 10000);
-        }
+         // [RegisterCommand(Help = "Times the execution of a Command", MinArgCount = 1)]
+         // static void CommandTime(CommandArg[] args) {
+         //     var sw = new Stopwatch();
+         //     sw.Start();
+         //
+         //     Terminal.Shell.RunCommand(JoinArguments(args));
+         //
+         //     sw.Stop();
+         //     Terminal.Log("Time: {0}ms", (double)sw.ElapsedTicks / 10000);
+         // }
 
         [RegisterCommand(Help = "Outputs message")]
         static void CommandPrint(CommandArg[] args) {
@@ -75,14 +75,14 @@ namespace CommandTerminal
         }
     #endif
 
-        [RegisterCommand(Help = "Quits running Application", MaxArgCount = 0)]
-        static void CommandQuit(CommandArg[] args) {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
-        }
+        // [RegisterCommand(Help = "Quits running Application", MaxArgCount = 0)]
+        // static void CommandQuit(CommandArg[] args) {
+        // #if UNITY_EDITOR
+        //     UnityEditor.EditorApplication.isPlaying = false;
+        // #else
+        //     Application.Quit();
+        // #endif
+        // }
 
         static string JoinArguments(CommandArg[] args) {
             var sb = new StringBuilder();

@@ -37,9 +37,9 @@ namespace ggjj2020
             if (s_Instance == null)
             {
                 s_Instance = this;
+                characterStats.OnInputUpdate +=UpdateControl;
                 characterStats.ReadFromConfigFile();
                 watchFileCoroutine = StartCoroutine(characterStats.WatchFile());
-                characterStats.OnInputUpdate +=UpdateControl;
             }
             else
                 throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");
@@ -51,9 +51,9 @@ namespace ggjj2020
             if (s_Instance == null)
             {
                 s_Instance = this;
+                characterStats.OnInputUpdate +=UpdateControl;
                 characterStats.ReadFromConfigFile();
                 watchFileCoroutine = StartCoroutine(characterStats.WatchFile());
-                characterStats.OnInputUpdate +=UpdateControl;
             }
             else if(s_Instance != this)
                 throw new UnityException("There cannot be more than one PlayerInput script.  The instances are " + s_Instance.name + " and " + name + ".");

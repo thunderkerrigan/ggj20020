@@ -332,7 +332,18 @@
             </e>
           </e>
         </e>
+        <e p="CommandTerminal" t="Include">
+          <e p="BuiltinCommands.cs" t="Include" />
+          <e p="CommandAutocomplete.cs" t="Include" />
+          <e p="CommandHistory.cs" t="Include" />
+          <e p="CommandLog.cs" t="Include" />
+          <e p="CommandShell.cs" t="Include" />
+          <e p="RegisterCommandAttribute.cs" t="Include" />
+          <e p="Terminal.cs" t="Include" />
+        </e>
         <e p="Script" t="Include">
+          <e p="BringToFront.cs" t="Include" />
+          <e p="ConsoleLog.cs" t="Include" />
           <e p="RetryWarning.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
@@ -355,8 +366,10 @@
           <e p="Operator" t="Include">
             <e p="GameObjectOperator_FollowTarget.cs" t="Include" />
           </e>
+          <e p="Platform.cs" t="Include" />
           <e p="PlayerControlConfigurator.cs" t="Include" />
           <e p="PlayerPos.cs" t="Include" />
+          <e p="TerminalManager.cs" t="Include" />
         </e>
       </e>
       <e p="ExternalCheck.csproj" t="IncludeRecursive" />
