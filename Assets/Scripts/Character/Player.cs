@@ -40,6 +40,7 @@ namespace ggjj2020 {
         protected readonly int _HashHorizontalSpeedPara = Animator.StringToHash("speedX");
         protected readonly int _HashVerticalSpeedPara = Animator.StringToHash("speedY");
         protected readonly int _HashGroundedPara = Animator.StringToHash("isGrounded");
+        protected readonly int _HashMovingXPara = Animator.StringToHash("isMovingX");
 		
         protected const float k_GroundedStickingVelocityMultiplier = 3f;    // This is to help the character stick to vertically moving platforms.
 
@@ -85,6 +86,7 @@ namespace ggjj2020 {
 			this._Animator.SetFloat(this._HashHorizontalSpeedPara, this._MoveVector.x);
 			this._Animator.SetFloat(this._HashVerticalSpeedPara, this._MoveVector.y);
 			this._Animator.SetBool(this._HashGroundedPara, isGrounded);
+			this._Animator.SetBool(this._HashMovingXPara, (this._MoveVector.x > 0.01f || this._MoveVector.x < -0.01f));
 		}
 		#endregion
 
