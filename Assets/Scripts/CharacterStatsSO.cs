@@ -247,7 +247,7 @@ public class CharacterStatsSO : ScriptableObject
     private readonly string _baseDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                                        "/RepairGame/ConfigurationFiles/";
 
-    private string path => _baseDir + "spline.json";
+    public string path => _baseDir + "spline.json";
     public KeyCode Pause = KeyCode.Escape;
     public KeyCode Interact = KeyCode.E;
     public KeyCode MeleeAttack = KeyCode.K;
