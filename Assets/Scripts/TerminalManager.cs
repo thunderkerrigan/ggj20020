@@ -14,7 +14,12 @@ public class TerminalManager : MonoBehaviour
     private List<GameObject> platforms = new List<GameObject>();
     private GlitchEffect glitchEffect;
     private Coroutine glitchcoroutine;
+    private Coroutine glitchCountdownCoroutine;
+    public GameObject bg;
+    public GameObject hd;
     public event Action<bool> OnPlatform;
+
+    private bool isGlitched = false;
     
     public static TerminalManager Instance
     {
@@ -39,8 +44,11 @@ public class TerminalManager : MonoBehaviour
             glitchEffect = camera.GetComponent<GlitchEffect>();
             StartGlitch();
         }
-        Terminal.Shell.AddCommand("PlatForm", PlatForm, 0, 2, "Manage Platforms");
-        Terminal.Shell.AddCommand("cam", Camera, 1, 1, "Manage Camera");
+
+        StartCoroutine(ScrambleDecorations());
+        Terminal.Shell.AddCommand("PlatForm", PlatForm, 0, 2, "Manage Platforms. What was it even for ?");
+        Terminal.Shell.AddCommand("cam", Camera, 1, 1, "Manage Camera. Those godamned bees messing with my brains!");
+        Terminal.Shell.AddCommand("Graphism", Graphism, 1, 1, "Manage Graphism. Let's get beautiful !");
     }
     
     public void RegisterPlatform(GameObject go)
@@ -55,7 +63,7 @@ public class TerminalManager : MonoBehaviour
     {
         while (true)
         {
-            if (glitchEffect)
+            if (glitchEffect && isGlitched)
             {
                 glitchEffect.intensity = Math.Min(glitchEffect.intensity + Random.Range(0, 0.08f), 1f);
                 glitchEffect.flipIntensity = Math.Min(glitchEffect.flipIntensity + Random.Range(0, 0.08f), 1f);
@@ -67,6 +75,7 @@ public class TerminalManager : MonoBehaviour
 
     public void StartGlitch()
     {
+        glitchCountdownCoroutine = StartCoroutine(GlitchCountdown());
         glitchcoroutine = StartCoroutine(Glitch());
     }
     
@@ -77,6 +86,12 @@ public class TerminalManager : MonoBehaviour
 
     public void ResetGlitchCamera()
     {
+        isGlitched = false;
+        if (glitchCountdownCoroutine != null)
+        {
+            StopCoroutine(glitchCountdownCoroutine);
+        }
+        glitchCountdownCoroutine = StartCoroutine(GlitchCountdown());
         if (glitchEffect)
         {
         glitchEffect.intensity = 0;
@@ -152,6 +167,75 @@ public class TerminalManager : MonoBehaviour
                 Terminal.Log("camera reset : Reset camera view. Might get rid of those sneaky glitches.");
                 break;
         }
+    }
+    private void Graphism(CommandArg[] args)
+    {
+
+        if (args.Length == 0)
+        {
+            Terminal.Log("Graphism <low | medium | high> : set graphism settings. Candy eye for the soul!.");
+            return;
+                                
+        }
+        switch (args[0].String.ToUpper())
+        {
+            case "LOW":
+                bg.SetActive(false);
+                hd.SetActive(false);
+                Terminal.Log("* GASP * Are you sure about that ?");
+                break;
+            case "MEDIUM":
+                bg.SetActive(true);
+                hd.SetActive(false);
+                Terminal.Log("Guess that's your jam... not judging.");
+                break;
+            case "HIGH":
+                bg.SetActive(true);
+                hd.SetActive(true);
+                Terminal.Log("😎 Now we're talking... that's smooth as heck 😎");
+                break;
+            default:
+                Terminal.Log("Graphism <low | medium | high> : set graphism settings. Candy eye for the soul!.");
+
+                break;
+        }
+    }
+
+    private IEnumerator ScrambleDecorations()
+    {
+        yield return new WaitForSeconds(30);
+        while (true)
+        {
+            foreach (Transform component in hd.transform)
+            {
+                var gos = component.transform;
+                if (gos != null)
+                {
+                    foreach (Transform go in gos)
+                    {
+                        if (isGlitched)
+                        {
+                            var active = Random.value >= 0.5f;
+                            go.gameObject.SetActive(active);    
+                        }
+                        else
+                        {
+                            go.gameObject.SetActive(true);
+                        }
+                        
+                    }
+                }
+            }
+            yield return new WaitForSeconds(2);
+        }
+    }
+
+    private IEnumerator GlitchCountdown()
+    {
+        Debug.Log("start countdown");
+        yield return new WaitForSeconds(10);
+        Debug.Log("end countdown");
+        isGlitched = true;
     }
 
     private void EnablePlatform(CommandArg[] args)

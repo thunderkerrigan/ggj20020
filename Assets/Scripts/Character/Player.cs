@@ -36,12 +36,12 @@ namespace ggjj2020 {
 
 		// Animation
         protected Animator _Animator;
-        protected readonly int _HashHorizontalSpeedPara = Animator.StringToHash("HorizontalSpeed");
-        protected readonly int _HashVerticalSpeedPara = Animator.StringToHash("VerticalSpeed");
-        protected readonly int _HashGroundedPara = Animator.StringToHash("Grounded");
+        protected readonly int _HashHorizontalSpeedPara = Animator.StringToHash("speedX");
+        protected readonly int _HashVerticalSpeedPara = Animator.StringToHash("speedY");
+        protected readonly int _HashGroundedPara = Animator.StringToHash("isGrounded");
 		
         protected const float k_GroundedStickingVelocityMultiplier = 3f;    // This is to help the character stick to vertically moving platforms.
-		
+
 		#endregion
 
 
@@ -49,6 +49,7 @@ namespace ggjj2020 {
 		// Start is called before the first frame update
 		void Awake (){			
             this._CharacterController2D = GetComponent<CharacterController2D>();
+			this._Animator = GetComponent<Animator>();
 			// CharacterStats
 			if (this._characterStats != null) {
 				this._characterStats.OnInputUpdate += UpdateControl;
@@ -72,23 +73,18 @@ namespace ggjj2020 {
 
 			// Get Horizontal movement input
 			this.GroundedHorizontalMovement(PlayerInput.Instance.Horizontal.ReceivingInput);
-
-			// Manage Jump
-			bool isGrounded = this.CheckForGrounded();
-			if (isGrounded) { this._isJumping = false; } // We are not jumping if we are grounded
-			if (this.CheckForJumpInput() && isGrounded ) {
-				this.SetVerticalMovement(this._jumpSpeed);
-				this._isJumping = true;
-			}
-
 		}
 		void FixedUpdate () {
-            this._CharacterController2D.Move(this._MoveVector * Time.deltaTime);
-            UpdateJump();
+			bool isGrounded = this.CheckForGrounded();
+			if (isGrounded) { this._isJumping = false; } // We are not jumping if we are grounded
+			Jump(isGrounded);
+			UpdateJump();
 			AirborneHorizontalMovement();
-			AirborneVerticalMovement();
-//m_Animator.SetFloat(m_HashHorizontalSpeedPara, this._MoveVector.x);
-//m_Animator.SetFloat(m_HashVerticalSpeedPara, this._MoveVector.y);
+			AirborneVerticalMovement(isGrounded);
+            this._CharacterController2D.Move(this._MoveVector * Time.deltaTime);
+			this._Animator.SetFloat(this._HashHorizontalSpeedPara, this._MoveVector.x);
+			this._Animator.SetFloat(this._HashVerticalSpeedPara, this._MoveVector.y);
+			this._Animator.SetBool(this._HashGroundedPara, isGrounded);
 		}
 		#endregion
 
@@ -195,6 +191,14 @@ namespace ggjj2020 {
             return PlayerInput.Instance.Jump.Down;
         }
 
+		// Launch the jump if need
+		public void Jump (bool isGrounded) {
+			if (isGrounded && this.CheckForJumpInput()) {
+				this.SetVerticalMovement(this._jumpSpeed);
+				this._isJumping = true;
+			}
+		}
+
         public void SetVerticalMovement(float newVerticalMovement)
         {
             this._MoveVector.y = newVerticalMovement;
@@ -237,9 +241,8 @@ namespace ggjj2020 {
             this._MoveVector.x = Mathf.MoveTowards(this._MoveVector.x, desiredSpeed, acceleration * Time.deltaTime);
         }
 
-        public void AirborneVerticalMovement()
+        public void AirborneVerticalMovement(bool isGrounded)
         {
-			bool isGrounded = this.CheckForGrounded();
             if (Mathf.Approximately(this._MoveVector.y, 0f) || (this._CharacterController2D.IsCeilinged && this._MoveVector.y > 0f) || (isGrounded && !this._isJumping)){
                 this._MoveVector.y = 0f;
             }
