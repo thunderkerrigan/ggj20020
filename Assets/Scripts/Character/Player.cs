@@ -11,8 +11,10 @@ namespace ggjj2020 {
 	public class Player : MonoBehaviour
 	{
 		#region PROPERTIES
-
+		
+        public Animator _Animator;
         public CharacterStatsSO _characterStats;
+
 		// Horizontal mouvement parameters
 		[Header("Horizontal mouvement")]
         public float _maxSpeed = 10f;
@@ -35,7 +37,6 @@ namespace ggjj2020 {
 		protected bool _isJumping;
 
 		// Animation
-        protected Animator _Animator;
         protected readonly int _HashHorizontalSpeedPara = Animator.StringToHash("speedX");
         protected readonly int _HashVerticalSpeedPara = Animator.StringToHash("speedY");
         protected readonly int _HashGroundedPara = Animator.StringToHash("isGrounded");
@@ -49,7 +50,6 @@ namespace ggjj2020 {
 		// Start is called before the first frame update
 		void Awake (){			
             this._CharacterController2D = GetComponent<CharacterController2D>();
-			this._Animator = GetComponent<Animator>();
 			// CharacterStats
 			if (this._characterStats != null) {
 				this._characterStats.OnInputUpdate += UpdateControl;
