@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputType: 0
+  characterStats: {fileID: 11400000, guid: 48533858a43174a2ba3953e9ca06613b, type: 2}
   Pause:
     key: 27
     controllerButton: 8

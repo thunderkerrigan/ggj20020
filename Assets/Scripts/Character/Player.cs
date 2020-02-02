@@ -80,12 +80,13 @@ namespace ggjj2020 {
 				this.SetVerticalMovement(this._jumpSpeed);
 				this._isJumping = true;
 			}
-			UpdateJump();
-			AirborneHorizontalMovement();
-			AirborneVerticalMovement();
+
 		}
 		void FixedUpdate () {
             this._CharacterController2D.Move(this._MoveVector * Time.deltaTime);
+            UpdateJump();
+			AirborneHorizontalMovement();
+			AirborneVerticalMovement();
 //m_Animator.SetFloat(m_HashHorizontalSpeedPara, this._MoveVector.x);
 //m_Animator.SetFloat(m_HashVerticalSpeedPara, this._MoveVector.y);
 		}
