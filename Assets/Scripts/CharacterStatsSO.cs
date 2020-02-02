@@ -358,10 +358,8 @@ public class CharacterStatsSO : ScriptableObject
 
     public void ScrambleStats(int checkpoint)
     {
-        Debug.Log("checkpoint " + checkpoint);
         if (checkpoint > highestCheckpoint)
         {
-            Debug.Log("is higher ");
             highestCheckpoint = checkpoint;
             var charStats = checkpoints[checkpoint - 1];
             if (charStats != null)
@@ -371,6 +369,6 @@ public class CharacterStatsSO : ScriptableObject
         }
 
         
-        throw new UnityException("BRIAN TU PUE");
+        throw new UnityException("BRIAN TU PUES");
     }
 }

@@ -16,7 +16,6 @@ public class CheckPoint : MonoBehaviour
        if(other.CompareTag("Player")){
            gm.lastCheckPointPos= transform.position;
            characterStats.ScrambleStats(checkpointNumber);
-           Debug.Log("Last Checkpoint ...");
        }
    }
 
