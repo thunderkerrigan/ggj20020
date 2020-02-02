@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pause: 27
   Interact: 101
-  MeleeAttack: 107
-  RangedAttack: 111
+  MeleeAttack: 111
+  RangedAttack: 112
   Jump: 32
   HorizontalPositive: 100
-  HorizontalNegative: 97
+  HorizontalNegative: 113
   VerticalPositive: 119
   VerticalNegative: 115
-  jumpSpeed: 10
+  jumpSpeed: 30
   inputLatency: 0
-  highestCheckpoint: 0
+  highestCheckpoint: 2
   shouldReset: 0
