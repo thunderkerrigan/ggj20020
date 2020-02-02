@@ -21209,7 +21209,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1037531010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b15f48962697646a8c14c6ffa69a52, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fc20d61067d2d147b95fdda6a339d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   basta: {fileID: 11400000, guid: 48533858a43174a2ba3953e9ca06613b, type: 2}
@@ -27538,6 +27538,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 834621928}
     m_Modifications:
+    - target: {fileID: 2792225786000964580, guid: 4d5149e6f20722240bac559517e0508c,
+        type: 3}
+      propertyPath: m_text
+      value: WARNING
+      objectReference: {fileID: 0}
     - target: {fileID: 4319089381363234182, guid: 4d5149e6f20722240bac559517e0508c,
         type: 3}
       propertyPath: m_text
