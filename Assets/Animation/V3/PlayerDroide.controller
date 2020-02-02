@@ -302,7 +302,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: speedX
     m_Mirror: 0
-  m_BlendParameter: speedX
+  m_BlendParameter: lastDirection
   m_BlendParameterY: speedX
   m_MinThreshold: -1
   m_MaxThreshold: 1
@@ -508,7 +508,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: speedX
     m_Mirror: 0
-  m_BlendParameter: speedX
+  m_BlendParameter: lastDirection
   m_BlendParameterY: speedX
   m_MinThreshold: -1
   m_MaxThreshold: 1
@@ -578,7 +578,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: speedX
     m_Mirror: 0
-  m_BlendParameter: speedX
+  m_BlendParameter: lastDirection
   m_BlendParameterY: speedX
   m_MinThreshold: -1
   m_MaxThreshold: 1
