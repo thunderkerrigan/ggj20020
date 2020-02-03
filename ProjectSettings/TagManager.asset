@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - GM
+  - platform
+  - HD
+  - BG
   layers:
   - Default
   - TransparentFX

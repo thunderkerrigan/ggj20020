@@ -1,0 +1,355 @@
+fileFormatVersion: 2
+guid: aac17b7cda3b9b24a9eb309393f0abeb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7932641807615540708
+    second: BTNS_0
+  - first:
+      213: -1443749177262432481
+    second: BTNS_1
+  - first:
+      213: -3141708938628647062
+    second: BTNS_2
+  - first:
+      213: 2994300307093374155
+    second: BTNS_3
+  - first:
+      213: -5150214227125282969
+    second: BTNS_4
+  - first:
+      213: 172749564549746077
+    second: BTNS_5
+  - first:
+      213: 5897628186265436485
+    second: BTNS_6
+  - first:
+      213: 3257727597853411481
+    second: BTNS_7
+  - first:
+      213: -4219814331864413223
+    second: BTNS_8
+  - first:
+      213: 5148780022513755775
+    second: BTNS_9
+  - first:
+      213: -7496808508026893082
+    second: BTNS_10
+  - first:
+      213: -790499950443966961
+    second: BTNS_11
+  - first:
+      213: -400911310924052315
+    second: BTNS_12
+  - first:
+      213: -1479228235226590928
+    second: BTNS_13
+  - first:
+      213: -3270917115311724338
+    second: BTNS_14
+  - first:
+      213: -5900368527292690818
+    second: BTNS_15
+  - first:
+      213: 5293732396259832854
+    second: BTNS_16
+  - first:
+      213: -4462236733522461297
+    second: BTNS_17
+  - first:
+      213: -4173562015144527734
+    second: BTNS_18
+  - first:
+      213: 4377412815929281389
+    second: BTNS_19
+  - first:
+      213: 439006028705405021
+    second: BTNS_20
+  - first:
+      213: 4245608863527219302
+    second: BTNS_21
+  - first:
+      213: -2849782552314259353
+    second: BTNS_22
+  - first:
+      213: -7039547817147727250
+    second: BTNS_23
+  - first:
+      213: 7166662096831077972
+    second: BTNS_24
+  - first:
+      213: -3243930692882660940
+    second: BTNS_25
+  - first:
+      213: -5511576513323318508
+    second: BTNS_26
+  - first:
+      213: 5687223960129984270
+    second: BTNS_27
+  - first:
+      213: 7482377361529806347
+    second: BTNS_28
+  - first:
+      213: 8596738228746609059
+    second: BTNS_29
+  - first:
+      213: 8918858113291110013
+    second: BTNS_30
+  - first:
+      213: -2657514885024270116
+    second: BTNS_31
+  - first:
+      213: -9079231780272580358
+    second: BTNS_32
+  - first:
+      213: -1548519191417213759
+    second: BTNS_33
+  - first:
+      213: -8889164826669035748
+    second: BTNS_34
+  - first:
+      213: 5743771537476272599
+    second: BTNS_35
+  - first:
+      213: 7144226394380697618
+    second: BTNS_36
+  - first:
+      213: -6983076762124169637
+    second: BTNS_37
+  - first:
+      213: -7174195992508400754
+    second: BTNS_38
+  - first:
+      213: -4775188400829478335
+    second: BTNS_39
+  - first:
+      213: -7992681458209747955
+    second: BTNS_40
+  - first:
+      213: -688908206983371241
+    second: BTNS_41
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BTNS_0
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 502
+        width: 181
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99e78ca888bf88e40bf7b60608e4a7d1
+      internalID: -7932641807615540708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTNS_1
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 507
+        width: 180
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1c9fcd46a221414fa4cdaf1bc602011
+      internalID: -1443749177262432481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTNS_2
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 705
+        width: 547
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d39dd7d9445ed349b5c3a9ab3dc157b
+      internalID: -3141708938628647062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTNS_3
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 883
+        width: 546
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65ebb2cd72ac5ca448567344f335607f
+      internalID: 2994300307093374155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTNS_4
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 870
+        width: 422
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3a3ed5b70b46394795cb997ffb832bb
+      internalID: -5150214227125282969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTNS_5
+      rect:
+        serializedVersion: 2
+        x: 1035
+        y: 677
+        width: 423
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53ae4eb5fd3656d4285e4f49cdd590d8
+      internalID: 172749564549746077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 3eb0f2df737fdfd4884f6df007a14dfa
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
