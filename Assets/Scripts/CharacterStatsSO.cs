@@ -331,7 +331,7 @@ public class CharacterStatsSO : ScriptableObject
         while (true)
         {
             ReadFromConfigFile();
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
         }
     }
 
