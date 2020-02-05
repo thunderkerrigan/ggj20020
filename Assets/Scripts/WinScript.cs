@@ -12,7 +12,7 @@ public class WinScript : MonoBehaviour
     Debug.Log("its Colliding!"); //1 is the build order it could be 1065 for you if you have that many scenes
         if(other.CompareTag("Player"))
         {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(2);
                 Debug.Log("its Colliding!"); //1 is the build order it could be 1065 for you if you have that many scenes
         }
 
